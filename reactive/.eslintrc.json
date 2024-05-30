@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true, "cypress/globals": true },
+  "extends": [
+    "canonical/auto",
+    "plugin:sonarjs/recommended",
+    "eslint:recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "ignorePatterns": [
+    "dist",
+    "*.config.ts",
+    "*.d.ts",
+    "*.json",
+    "pnpm-lock.yaml"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react-refresh",
+    "cypress",
+    "@mizdra/layout-shift",
+    "sonarjs",
+    "deprecate"
+  ],
+  "rules": {
+    "react-refresh/only-export-components": [
+      "off",
+      { "allowConstantExport": true }
+    ],
+
+    // Don't like
+    "no-undef": "off", // disable coz typescript check it already
+    "prettier/prettier": "off",
+    "canonical/filename-match-exported": "off",
+    "func-style": "off",
+    "canonical/filename-match-regex": "off",
+    "react/function-component-definition": "off",
+    "canonical/id-match": "off",
+    "react/jsx-no-undef": "off",
+    "import/no-unassigned-import": "off",
+    "import/extensions": "off"
+  }
+}
