@@ -1,13 +1,15 @@
-/* use it for dynamic themes */
-html.dark {
-  background: #121212;
-  color-scheme: dark;
-}
 
-html,
-body,
-#app {
-  height: 100%;
+*{
+  
   margin: 0;
   padding: 0;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+button {
+  
+  cursor: pointer;
+  background-color: inherit;
 }

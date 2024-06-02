@@ -27,8 +27,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "chrome"]
   },
-  "include": [".eslintrc.json", "unimport.d.ts", "app"],
+  "include": [".eslintrc.json", "unimport.d.ts", "app", "app/utils", "app/types", "app/stores"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

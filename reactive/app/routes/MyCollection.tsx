@@ -2,6 +2,7 @@ import Divider from '@/components/Divider'
 import CollectionInput from '@/components/collections/CollectionInput'
 import Collections from '../json/collections.json'
 import CollectionItem from '@/components/collections/CollectionItem'
+import OpenedTabs from '@/components/collections/OpenedTabs'
 
 function MyCollection() {
   const [visibleCollectionTextInput, setVisibleCollectionTextInput] =
@@ -23,8 +24,8 @@ function MyCollection() {
     }
   }
   return (
-    <div>
-      <div>
+    <div className="flex flex-1">
+      <div className="flex-1 overflow-auto">
         <div className="px-4">
           <button
             className="ml-auto bg-rose-500 rounded-md text-white text-11px px-4 py-2 flex items-center gap-2 tracking-wide font-semibold"
@@ -49,15 +50,20 @@ function MyCollection() {
         )}
 
         {collectionsData.map((collection) => (
-          <CollectionItem
-            collection={collection}
-            key={collection.collectionIndex}
-          />
+          <>
+            <CollectionItem
+              collection={collection}
+              key={collection.collectionIndex}
+            />
+            <Divider />
+          </>
         ))}
       </div>
 
       {/* Tabs */}
-      <div></div>
+      <div className="w-1/5 border-1 border-solid border-gray-300 border-t-0 p-4">
+        <OpenedTabs />
+      </div>
     </div>
   )
 }

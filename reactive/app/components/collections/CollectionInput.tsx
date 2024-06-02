@@ -17,7 +17,7 @@ function CollectionInput({
       />
       <div className="flex gap-4">
         <button
-          className="tracking-wide text-rose-500 text-xs font-semibold"
+          className="tracking-wide text-rose-500 text-xs font-semibold bg-white"
           onClick={() => setVisibleCollectionTextInput(false)}
         >
           CANCEL

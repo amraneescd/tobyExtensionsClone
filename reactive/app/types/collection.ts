@@ -9,3 +9,10 @@ export type Collection = {
     collectionIndex: number
     tabs: Tabs[]
 }
+
+export type Tab = {
+    tabTitle: string,
+    tabIcon: string,
+    tabURL: string,
+    closeTab: () => void,
+}

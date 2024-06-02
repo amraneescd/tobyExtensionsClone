@@ -1,12 +1,12 @@
 export const LinksNext = [
     {
-        name: "toLinks",
+        name: "/toLinks",
         title: "To/Links",
         icon: "i-material-symbols-link-rounded",
     },
 
     {
-        name: "next",
+        name: "/next",
         title: "Next",
         icon: "i-material-symbols-bookmark-outline",
     }
@@ -14,7 +14,7 @@ export const LinksNext = [
 
 export const spaces = [
     {
-        name: "starredCollections",
+        name: "/starredCollections",
         title: "Starred Collection",
         icon: "i-streamline-interface-favorite-star-reward-rating-rate-social-star-media-favorite-like-stars"
     },

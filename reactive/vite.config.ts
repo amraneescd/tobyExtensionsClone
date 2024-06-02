@@ -58,5 +58,6 @@ export default defineConfig(async () => {
         dts: true,
       }),
     ],
+    base: './',
   }
 })
