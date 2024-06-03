@@ -15,4 +15,5 @@ export type Tab = {
     tabIcon: string,
     tabURL: string,
     closeTab: () => void,
+    draggingTab: () => void;
 }

@@ -1,18 +1,26 @@
 import Divider from '@/components/Divider'
 import CollectionInput from '@/components/collections/CollectionInput'
-import Collections from '../json/collections.json'
 import CollectionItem from '@/components/collections/CollectionItem'
 import OpenedTabs from '@/components/collections/OpenedTabs'
+import { Collection } from '@/types/collection'
 
 function MyCollection() {
   const [visibleCollectionTextInput, setVisibleCollectionTextInput] =
     useState(false)
 
-  const [collectionsData, setCollectionsData] = useState(Collections)
+  // chrome.storage.local.clear()
+  const [collectionsData, setCollectionsData] = useState<Collection[]>([])
+  useEffect(() => {
+    chrome.storage.local.get(['Collections'], function (result) {
+      if (result.Collections) {
+        setCollectionsData(result.Collections)
+      }
+    })
+  }, [])
 
   function newCollection(collectionName?: string) {
     if (collectionName) {
-      const collectionIndex = collectionsData.length
+      const collectionIndex = collectionsData?.length
 
       const newCollectionObject = {
         collectionName: collectionName,
@@ -20,7 +28,14 @@ function MyCollection() {
         tabs: [],
       }
 
-      setCollectionsData([newCollectionObject, ...collectionsData])
+      const updatedCollections = [newCollectionObject, ...collectionsData]
+
+      chrome.storage.local.set(
+        { Collections: updatedCollections },
+        function () {
+          setCollectionsData(updatedCollections)
+        }
+      )
     }
   }
   return (
@@ -49,15 +64,23 @@ function MyCollection() {
           </>
         )}
 
-        {collectionsData.map((collection) => (
-          <>
-            <CollectionItem
-              collection={collection}
-              key={collection.collectionIndex}
-            />
-            <Divider />
-          </>
-        ))}
+        {collectionsData.length > 0 ? (
+          collectionsData.map((collection) => (
+            <>
+              <CollectionItem
+                collection={collection}
+                key={collection.collectionIndex}
+                collections={collectionsData}
+                setCollectionsData={setCollectionsData}
+              />
+              <Divider />
+            </>
+          ))
+        ) : (
+          <h3 className="text-center font-bold text-gray-500 text-xl tracking-wide">
+            No Collection Has Been Made Yet
+          </h3>
+        )}
       </div>
 
       {/* Tabs */}

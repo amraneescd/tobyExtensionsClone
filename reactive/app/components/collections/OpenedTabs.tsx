@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import TabItem from './TabItem'
+import DefaultTabIcon from '../../assets/defaultTabIcon.png'
 
 function OpenedTabs() {
   const [allTabs, setAllTabs] = useState<chrome.tabs.Tab[]>([])
@@ -20,9 +21,12 @@ function OpenedTabs() {
         <TabItem
           key={tab.id}
           tabTitle={tab.title || 'Untitled'}
-          tabIcon={tab.favIconUrl || ''}
+          tabIcon={tab.favIconUrl || DefaultTabIcon}
           tabURL={tab.url || ''}
           closeTab={() => closeTab(tab.id || 0)}
+          draggingTab={function (): void {
+            throw new Error('Function not implemented.')
+          }}
         />
       ))}
     </div>

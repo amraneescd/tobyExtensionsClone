@@ -7,8 +7,6 @@ function Sidebar() {
     window.location.hash.slice(1) || ''
   )
 
-  console.log(activeItem)
-
   const changeNavBarTitle = useChangeNavBarTitle((state) => state.changeTitle)
 
   const navigateTo = (path: string, title: string) => {
