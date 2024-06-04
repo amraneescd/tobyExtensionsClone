@@ -3,7 +3,7 @@ import CloseButton from '../CloseButton'
 import { DragEvent } from 'react'
 import { useSetDraggedTabData } from '@/stores/draggedTab'
 
-function TabItem({ tabTitle, tabIcon, tabURL, closeTab }: Tab) {
+function TabItem({ tabTitle, tabIcon, tabURL, tabID, closeTab }: Tab) {
   // Handle On Drag Start
   const setDraggedData = useSetDraggedTabData((state) => state.setDraggedIcon)
 
@@ -15,7 +15,7 @@ function TabItem({ tabTitle, tabIcon, tabURL, closeTab }: Tab) {
     const href = e.currentTarget.href
     if (tabName && href) {
       if (tabIcon == null) tabIcon = ''
-      setDraggedData(tabName, tabIcon, href)
+      setDraggedData(tabName, tabIcon, href, tabID)
     }
   }
 
@@ -31,7 +31,7 @@ function TabItem({ tabTitle, tabIcon, tabURL, closeTab }: Tab) {
         draggable="true"
         onDragStart={(e) => handleDragStart(e)}
         onDragEnd={() => handleDragEnd()}
-        className="flex gap-1 items-center px-4 py-2 rounded-lg bg-gray-200 shadow-md mb-2 text-black no-underline"
+        className="flex gap-1 items-center px-4 py-2 rounded-lg bg-gray-200 shadow-md mb-2 text-black no-underline cursor-grab"
       >
         <img
           src={tabIcon}

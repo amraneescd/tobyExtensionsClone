@@ -15,7 +15,7 @@ function OpenedTabs() {
     chrome.tabs.remove(tabId, () => {})
   }
   return (
-    <div className="">
+    <div>
       <h3 className="text-xl mb-4">All Tabs</h3>
       {allTabs.map((tab) => (
         <TabItem
@@ -24,6 +24,7 @@ function OpenedTabs() {
           tabIcon={tab.favIconUrl || DefaultTabIcon}
           tabURL={tab.url || ''}
           closeTab={() => closeTab(tab.id || 0)}
+          tabID={tab.id}
           draggingTab={function (): void {
             throw new Error('Function not implemented.')
           }}

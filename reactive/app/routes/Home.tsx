@@ -1,7 +1,5 @@
 import MyCollection from './MyCollection'
-import Next from './Next'
 import StarredCollections from './StarredCollections'
-import ToLinks from './ToLinks'
 
 export default function Home({ activeComponent }: any) {
   let content
@@ -13,25 +11,26 @@ export default function Home({ activeComponent }: any) {
     case '':
       content = <MyCollection />
       break
-    case '//next':
-      content = <Next />
-      break
     case '//starredCollections':
       content = <StarredCollections />
       break
-    case '//toLinks':
-      content = <ToLinks />
-      break
     default:
-      content = <div>No content found</div>
+      content = <div>Wrong Page</div>
   }
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <NavBar />
-        {content}
+    <div className="h-screen relative overflow-hidden">
+      {/* Warning for smaller screens  */}
+      <h3 className="w-full h-full absolute top-0 left-0 flex justify-center items-center lg:hidden text-xl text-gray-500 tracking-wide text-center">
+        This Extension Was Designed For Computers And Bigger Screens Only
+      </h3>
+
+      <div className="h-full hidden lg:flex">
+        <Sidebar />
+        <div className="h-full flex-1 flex flex-col">
+          <NavBar />
+          {content}
+        </div>
       </div>
     </div>
   )

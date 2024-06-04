@@ -19,28 +19,24 @@ function MyCollection() {
   }, [])
 
   function newCollection(collectionName?: string) {
-    if (collectionName) {
-      const collectionIndex = collectionsData?.length
+    const collectionIndex = collectionsData?.length
 
-      const newCollectionObject = {
-        collectionName: collectionName,
-        collectionIndex: collectionIndex,
-        tabs: [],
-      }
-
-      const updatedCollections = [newCollectionObject, ...collectionsData]
-
-      chrome.storage.local.set(
-        { Collections: updatedCollections },
-        function () {
-          setCollectionsData(updatedCollections)
-        }
-      )
+    const newCollectionObject = {
+      collectionName: collectionName || 'Untitled',
+      collectionIndex: collectionIndex,
+      isStarredCollection: false,
+      tabs: [],
     }
+
+    const updatedCollections = [newCollectionObject, ...collectionsData]
+
+    chrome.storage.local.set({ Collections: updatedCollections }, function () {
+      setCollectionsData(updatedCollections)
+    })
   }
   return (
-    <div className="flex flex-1">
-      <div className="flex-1 overflow-auto">
+    <div className="flex flex-1 overflow-auto">
+      <div className="flex-1">
         <div className="px-4">
           <button
             className="ml-auto bg-rose-500 rounded-md text-white text-11px px-4 py-2 flex items-center gap-2 tracking-wide font-semibold"
@@ -64,27 +60,31 @@ function MyCollection() {
           </>
         )}
 
-        {collectionsData.length > 0 ? (
-          collectionsData.map((collection) => (
-            <>
-              <CollectionItem
-                collection={collection}
-                key={collection.collectionIndex}
-                collections={collectionsData}
-                setCollectionsData={setCollectionsData}
-              />
-              <Divider />
-            </>
-          ))
-        ) : (
-          <h3 className="text-center font-bold text-gray-500 text-xl tracking-wide">
-            No Collection Has Been Made Yet
-          </h3>
-        )}
+        <div className="h-96">
+          {collectionsData.length > 0 ? (
+            collectionsData.map((collection) => (
+              <>
+                <CollectionItem
+                  collection={collection}
+                  key={collection.collectionIndex}
+                  collections={collectionsData}
+                  setCollectionsData={setCollectionsData}
+                  collectionIndex={collection.collectionIndex}
+                  isStarredCollection={collection.isStarredCollection}
+                />
+                <Divider />
+              </>
+            ))
+          ) : (
+            <h3 className="text-center font-bold text-gray-500 text-xl tracking-wide">
+              No Collection Has Been Made Yet
+            </h3>
+          )}
+        </div>
       </div>
 
       {/* Tabs */}
-      <div className="w-1/5 border-1 border-solid border-gray-300 border-t-0 p-4">
+      <div className="w-1/5 h-fit border-1 border-solid border-b-0 border-gray-300 border-t-0 p-4">
         <OpenedTabs />
       </div>
     </div>
