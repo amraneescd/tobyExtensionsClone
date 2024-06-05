@@ -35,12 +35,16 @@ function CollectionItem({
   const tabURL = useSetDraggedTabData((state) => state.tabURL)
   const tabID = useSetDraggedTabData((state) => state.tabID)
 
+  // Handle while dragging the tab
+  const [isDraggingTab, setIsDraggingTab] = useState(false)
+
   if (tabIcon == '') tabIcon = DefaultTabIcon // Set a default icon
 
   // Handle the dropped tabs inside the collection
   function handleDrop() {
     // Define the dragged tab info in case there is one
     if (tabName && tabURL) {
+      setIsDraggingTab(false)
       const tabs = collection.tabs
       collection.tabs = [
         ...tabs,
@@ -145,8 +149,12 @@ function CollectionItem({
     <div
       key={collection.collectionIndex}
       className="p-4 border-b-1.2px border-gray-300 my-4 relative"
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={(e) => {
+        e.preventDefault()
+        setIsDraggingTab(true)
+      }}
       onDrop={() => handleDrop()}
+      onDragLeave={() => setIsDraggingTab(false)}
     >
       {/* collection options  */}
 
@@ -207,6 +215,12 @@ function CollectionItem({
                 {/* Tab Options  */}
               </div>
             ))}
+
+            {isDraggingTab && (
+              <div className="flex justify-center items-center font-bold tracking-wide border-dotted border-gray-500 rounded-lg opacity-50 h-185px">
+                Drag It Here
+              </div>
+            )}
           </div>
         ) : (
           <div className="p-2 text-xs text-gray-500 w-full text-center border-2 border-dotted">
