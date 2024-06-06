@@ -36,6 +36,7 @@ function MyCollection() {
   }
   return (
     <div className="flex flex-1 overflow-auto">
+      {/* All My Collection  */}
       <div className="flex-1">
         <div className="px-4">
           <button

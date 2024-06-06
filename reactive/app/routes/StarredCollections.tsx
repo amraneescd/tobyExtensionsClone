@@ -16,14 +16,18 @@ function StarredCollections() {
     collectionsData.map(
       (collection) =>
         collection.isStarredCollection == true && (
-          <CollectionItem
-            collection={collection}
-            key={collection.collectionIndex}
-            collections={collectionsData}
-            setCollectionsData={setCollectionsData}
-            collectionIndex={collection.collectionIndex}
-            isStarredCollection={collection.isStarredCollection}
-          />
+          <>
+            <CollectionItem
+              collection={collection}
+              key={collection.collectionIndex}
+              collections={collectionsData}
+              setCollectionsData={setCollectionsData}
+              collectionIndex={collection.collectionIndex}
+              isStarredCollection={collection.isStarredCollection}
+            />
+
+            <Divider />
+          </>
         )
     )
   ) : (

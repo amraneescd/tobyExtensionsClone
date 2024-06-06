@@ -1,5 +1,6 @@
 import MyCollection from './MyCollection'
 import StarredCollections from './StarredCollections'
+import { useChangeMode } from '@/stores/mode'
 
 export default function Home({ activeComponent }: any) {
   let content
@@ -18,14 +19,19 @@ export default function Home({ activeComponent }: any) {
       content = <div>Wrong Page</div>
   }
 
+  const mode = useChangeMode((state) => state.mode)
+
   return (
-    <div className="h-screen relative overflow-hidden">
+    <div
+      className={`h-screen relative overflow-hidden ${mode == 'black' && 'bg-[#121212] text-white'}`}
+    >
       {/* Warning for smaller screens  */}
       <h3 className="w-full h-full absolute top-0 left-0 flex justify-center items-center lg:hidden text-xl text-gray-500 tracking-wide text-center">
         This Extension Was Designed For Computers And Bigger Screens Only
       </h3>
 
       <div className="h-full hidden lg:flex">
+        <AccountBar />
         <Sidebar />
         <div className="h-full flex-1 flex flex-col">
           <NavBar />

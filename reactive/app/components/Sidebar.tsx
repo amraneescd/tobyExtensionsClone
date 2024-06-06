@@ -13,7 +13,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="w-1/5 border-1 border-solid border-gray-300 border-b-0 h-full pt-8 text-15px">
+    <div className="w-fit border-1 border-solid border-gray-300 border-y-0 h-full pt-8 pr-8 text-15px">
       <div className="font-bold text-xs px-4 tracking-widest text-gray-700 mb-2">
         SPACES
       </div>

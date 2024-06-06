@@ -7,6 +7,7 @@ import SaveCollectionName from './SaveName'
 import Delete from './DeleteCollection'
 import DeleteTab from './DeleteTab'
 import StarCollectionButton from './StarCollectionButton'
+import DragArea from './DragArea'
 
 function CollectionItem({
   collection,
@@ -26,8 +27,14 @@ function CollectionItem({
     collection.collectionName
   )
 
+  // Collapsing
+  const [isCollapse, setIsCollapse] = useState(false)
+
   const editCollectionNameRef = useRef<HTMLInputElement>(null)
   const [isNameInEdit, setIsNameInEdit] = useState(false)
+
+  // Handle Mode
+  const mode = useChangeMode((state) => state.mode)
 
   // Handle Dragged tabs into the collection
   const tabName = useSetDraggedTabData((state) => state.tabTitle)
@@ -145,10 +152,20 @@ function CollectionItem({
     }
   }
 
+  function collapse() {
+    if (isCollapse) {
+      setIsCollapse(false)
+      return
+    }
+
+    setIsCollapse(true)
+  }
+  // Collaps the collection
+
   return (
     <div
       key={collection.collectionIndex}
-      className="p-4 border-b-1.2px border-gray-300 my-4 relative"
+      className="p-4 border-b-1.2px border-gray-300 my-4 relative overflow-hidden"
       onDragOver={(e) => {
         e.preventDefault()
         setIsDraggingTab(true)
@@ -170,28 +187,35 @@ function CollectionItem({
 
       <div>
         <input
-          className="text-xl text-gray-700 tracking-wide mb-2 text-ellipsis"
+          className={`text-xl ${mode == 'light' ? 'text-gray-700' : 'text-white'} tracking-wide mb-2 text-ellipsis bg-inherit`}
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
           readOnly
           ref={editCollectionNameRef}
         />
+
         {isNameInEdit && <SaveCollectionName SaveName={saveCollectionName} />}
+
+        <button onClick={() => collapse()}>
+          <div
+            className={`i-material-symbols-keyboard-arrow-down-rounded ${isCollapse && 'rotate-180'} bg-rose-500 w-6 h-6 transition-transform`}
+          />
+        </button>
       </div>
 
       {/* Tabs  */}
-      <div>
+      <div
+        className={`overflow-hidden transition-all ${isCollapse ? 'h-0 p-0' : 'py-4'}`}
+      >
         {collection.tabs?.length > 0 ? (
           <div className="grid grid-cols-4 gap-4">
             {collection.tabs.map((tab) => (
               <div
-                className="rounded-md shadow p-4 overflow-hidden no-underline text-black group relative cursor-pointer"
+                className={`rounded-md shadow ${mode == 'black' && 'shadow-white'} text-inherit p-4 overflow-hidden no-underline text-black group relative cursor-pointer`}
                 key={`${collection.collectionIndex}${tab.tabIndex}`}
                 onClick={() => {
-                  // Replace 'https://example.com' with the actual tab link
                   window.open(tab.tabLink, '_blank')
                 }}
-                // target="_blank"
               >
                 <div className="flex items-center gap-4">
                   <img
@@ -216,11 +240,7 @@ function CollectionItem({
               </div>
             ))}
 
-            {isDraggingTab && (
-              <div className="flex justify-center items-center font-bold tracking-wide border-dotted border-gray-500 rounded-lg opacity-50 h-185px">
-                Drag It Here
-              </div>
-            )}
+            {isDraggingTab && <DragArea />}
           </div>
         ) : (
           <div className="p-2 text-xs text-gray-500 w-full text-center border-2 border-dotted">
