@@ -9,7 +9,7 @@ function CollectionInput({
   const mode = useChangeMode((state) => state.mode)
 
   return (
-    <div className="flex px-4 gap-4">
+    <div className="flex gap-4">
       <input
         type="text"
         className={`${mode == 'black' && 'text-white'} outline-none p-2 text-xl border-b-2 border-gray-500 bg-inherit border-white border-solid border-1 rounded-lg`}
