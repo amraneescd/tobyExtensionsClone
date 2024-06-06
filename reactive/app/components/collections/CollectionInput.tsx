@@ -6,13 +6,12 @@ function CollectionInput({
   newCollection: (collectionName?: string) => void
 }) {
   const [collectionInputValue, setCollectionInputValue] = useState('')
-  const mode = useChangeMode((state) => state.mode)
 
   return (
     <div className="flex gap-4">
       <input
         type="text"
-        className={`${mode == 'black' && 'text-white'} outline-none p-2 text-xl border-b-2 border-gray-500 bg-inherit border-white border-solid border-1 rounded-lg`}
+        className={`${mode.value == 'dark' && 'text-white'} outline-none p-2 text-xl border-b-2 border-gray-500 bg-inherit border-white border-solid border-1 rounded-lg`}
         placeholder="Type the collection title"
         onChange={(event) => setCollectionInputValue(event.target.value)}
       />

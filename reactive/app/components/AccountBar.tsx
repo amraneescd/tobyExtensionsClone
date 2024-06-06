@@ -1,15 +1,4 @@
 function AccountBar() {
-  const mode = useChangeMode((state) => state.mode)
-  const changeMode = useChangeMode((state) => state.changeMode)
-
-  function handleChangeMode() {
-    if (mode == 'light') {
-      changeMode('black')
-      return
-    }
-
-    changeMode('light')
-  }
   return (
     <div className="p-4 h-full flex flex-col items-center gap-4">
       <div className="bg-rose-500 w-10 h-10 p-2px rounded-full">
@@ -17,8 +6,8 @@ function AccountBar() {
           UO
         </div>
       </div>
-      <button onClick={() => handleChangeMode()}>
-        {mode == 'light' ? (
+      <button onClick={() => mode.toggleColorMode()}>
+        {mode.value == 'light' ? (
           <div className="i-ph-moon-stars w-6 h-6" />
         ) : (
           <div className="i-ph-sun-dim-light w-6 h-6 bg-white" />

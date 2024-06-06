@@ -33,9 +33,6 @@ function CollectionItem({
   const editCollectionNameRef = useRef<HTMLInputElement>(null)
   const [isNameInEdit, setIsNameInEdit] = useState(false)
 
-  // Handle Mode
-  const mode = useChangeMode((state) => state.mode)
-
   // Handle Dragged tabs into the collection
   const tabName = useSetDraggedTabData((state) => state.tabTitle)
   let tabIcon = useSetDraggedTabData((state) => state.tabIcon)
@@ -187,7 +184,7 @@ function CollectionItem({
 
       <div>
         <input
-          className={`text-xl ${mode == 'light' ? 'text-gray-700' : 'text-white'} tracking-wide mb-2 text-ellipsis bg-inherit`}
+          className={`text-xl ${mode.value == 'light' ? 'text-gray-700' : 'text-white'} tracking-wide mb-2 text-ellipsis bg-inherit`}
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
           readOnly
@@ -211,7 +208,7 @@ function CollectionItem({
           <div className="grid grid-cols-4 gap-4">
             {collection.tabs.map((tab) => (
               <div
-                className={`rounded-md shadow ${mode == 'black' && 'shadow-white'} text-inherit p-4 overflow-hidden no-underline text-black group relative cursor-pointer`}
+                className={`rounded-md shadow ${mode.value == 'dark' && 'shadow-white'} text-inherit p-4 overflow-hidden no-underline text-black group relative cursor-pointer`}
                 key={`${collection.collectionIndex}${tab.tabIndex}`}
                 onClick={() => {
                   window.open(tab.tabLink, '_blank')

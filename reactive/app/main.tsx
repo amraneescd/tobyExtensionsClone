@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './routes/Home.tsx'
+import { I18nProvider } from '@lingui/react'
 import 'virtual:uno.css'
 
 import './styles/main.css'
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <React.StrictMode>
-      <Home activeComponent={activeComponent} />
+      <I18nProvider i18n={i18n}>
+        <Home activeComponent={activeComponent} />
+      </I18nProvider>
     </React.StrictMode>
   )
 }

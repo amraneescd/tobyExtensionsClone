@@ -15,7 +15,9 @@ function DragArea() {
             className="w-6 h-6"
           />
 
-          <p className="truncate">{tabName}</p>
+          <p className={`truncate ${mode.value == 'dark' && 'text-white'}`}>
+            {tabName}
+          </p>
         </div>
         <Divider />
 

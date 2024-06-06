@@ -1,6 +1,5 @@
 import MyCollection from './MyCollection'
 import StarredCollections from './StarredCollections'
-import { useChangeMode } from '@/stores/mode'
 
 export default function Home({ activeComponent }: any) {
   let content
@@ -19,11 +18,9 @@ export default function Home({ activeComponent }: any) {
       content = <div>Wrong Page</div>
   }
 
-  const mode = useChangeMode((state) => state.mode)
-
   return (
     <div
-      className={`h-screen relative overflow-hidden ${mode == 'black' && 'bg-[#121212] text-white'}`}
+      className={`h-screen relative overflow-hidden ${mode.isDark ? 'bg-#121212 text-white' : 'bg-white'}`}
     >
       {/* Warning for smaller screens  */}
       <h3 className="w-full h-full absolute top-0 left-0 flex justify-center items-center lg:hidden text-xl text-gray-500 tracking-wide text-center">
