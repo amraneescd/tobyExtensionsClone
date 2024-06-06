@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom/client'
-import Home from './routes/Home.tsx'
-import { I18nProvider } from '@lingui/react'
-import 'virtual:uno.css'
-
+// css imports
+import '@unocss/reset/tailwind.css'
 import './styles/main.css'
-const initialState = window.location.hash.slice(1) || ''
-function App() {
-  const [activeComponent, setActiveComponent] = useState(initialState)
+import 'virtual:uno.css'
+import { I18nProvider } from '@lingui/react'
+import { ClickToComponent } from 'click-to-react-component'
+// js imports
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
 
-  useEffect(() => {
-    const updateActiveComponent = () => {
-      setActiveComponent(window.location.hash.slice(1) || '')
-    }
-
-    window.addEventListener('hashchange', updateActiveComponent)
-
-    return () => window.removeEventListener('hashchange', updateActiveComponent)
-  }, [])
-
+export function Loader() {
   return (
-    <React.StrictMode>
-      <I18nProvider i18n={i18n}>
-        <Home activeComponent={activeComponent} />
-      </I18nProvider>
-    </React.StrictMode>
+    <div className="h-screen grid place-items-center">
+      <h1>I am Loader, Put your Logo here</h1>
+    </div>
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
+createRoot(document.querySelector('#root') as Element).render(
+  <StrictMode>
+    <I18nProvider i18n={i18n}>
+      <RouterProvider
+        fallbackElement={<Loader />}
+        router={router}
+      />
+      <ClickToComponent />
+    </I18nProvider>
+  </StrictMode>
+)
