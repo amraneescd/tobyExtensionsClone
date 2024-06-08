@@ -1,23 +1,4 @@
-import MyCollection from './MyCollection'
-import StarredCollections from './StarredCollections'
-
-export default function Home({ activeComponent }: any) {
-  let content
-
-  switch (activeComponent) {
-    case '/':
-      content = <MyCollection />
-      break
-    case '':
-      content = <MyCollection />
-      break
-    case '//starredCollections':
-      content = <StarredCollections />
-      break
-    default:
-      content = <div>Wrong Page</div>
-  }
-
+export default function Home() {
   return (
     <div
       className={`h-screen relative overflow-hidden ${mode.isDark ? 'bg-#121212 text-white' : 'bg-white'}`}
@@ -32,7 +13,7 @@ export default function Home({ activeComponent }: any) {
         <Sidebar />
         <div className="h-full flex-1 flex flex-col">
           <NavBar />
-          {content}
+          <Outlet />
         </div>
       </div>
     </div>
