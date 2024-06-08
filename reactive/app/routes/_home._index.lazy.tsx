@@ -2,17 +2,6 @@ import viteLogo from '@/assets/vite.jpg?w=75&h=75&format=webp'
 import { t } from '@lingui/macro'
 
 export function Component() {
-  const { savedName } = useUserStore((state) => ({
-    savedName: state.savedName,
-  }))
-  const [name, setName] = useState<string>(savedName)
-
-  const navigate = useNavigate()
-
-  function go() {
-    if (name) navigate(`/hi/${encodeURIComponent(name)}`)
-  }
-
   return (
     <div>
       <div className="font-sans flex gap-4 justify-center m-4">
@@ -52,11 +41,6 @@ export function Component() {
 
       <div className="py-4" />
 
-      <TheInput
-        onInput={(event) => setName(event.target.value)}
-        onPressEnter={() => go()}
-        value={name}
-      />
       <label
         className="hidden"
         htmlFor="input"
@@ -65,8 +49,6 @@ export function Component() {
       <div>
         <button
           className="m-3 text-sm btn"
-          disabled={!name}
-          onClick={() => go()}
           type="button"
         >
           {t`button.go`}

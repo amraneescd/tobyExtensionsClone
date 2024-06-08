@@ -1,30 +1,19 @@
-// css imports
-import '@unocss/reset/tailwind.css'
-import './styles/main.css'
-import 'virtual:uno.css'
-import { I18nProvider } from '@lingui/react'
-import { ClickToComponent } from 'click-to-react-component'
-// js imports
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-export function Loader() {
+import { I18nProvider } from '@lingui/react'
+import 'virtual:uno.css'
+
+import './styles/main.css'
+import { RouterProvider } from 'react-router-dom'
+function App() {
   return (
-    <div className="h-screen grid place-items-center">
-      <h1>I am Loader, Put your Logo here</h1>
-    </div>
+    <React.StrictMode>
+      <I18nProvider i18n={i18n}>
+        <RouterProvider router={router} />
+      </I18nProvider>
+    </React.StrictMode>
   )
 }
 
-createRoot(document.querySelector('#root') as Element).render(
-  <StrictMode>
-    <I18nProvider i18n={i18n}>
-      <RouterProvider
-        fallbackElement={<Loader />}
-        router={router}
-      />
-      <ClickToComponent />
-    </I18nProvider>
-  </StrictMode>
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
