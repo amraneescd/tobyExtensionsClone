@@ -19,4 +19,4 @@ And this approach will eliminate the power of the routing using `unplugin-remix-
 
 How to ensure the problem is not from my code?
 To ensure that the problem is not from my code by ethier creating a new project uses the `unplugin-remix-router`. Or to clone the `ws-rush/reactive` template from github (which uses the `unplugin-remix-router`).
-after that create the `manifest.json` file for the Chrome Extension, build the project `npm run build`, then finally load the `/dist` folder as an extension to the Chrome Broswer.
+after that create the `manifest.json` file for the Chrome Extension, build the project `npm run build`, then finally load the `/dist` folder as an extension to the Chrome Browser.
